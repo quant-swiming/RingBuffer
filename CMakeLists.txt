@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.15)
+make_minimum_required(VERSION 3.15)
 project(template VERSION 0.0)
 set(CMAKE_CXX_STANDARD 20)
-
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #thid lib 
 include(FetchContent)
 FetchContent_Declare(
@@ -27,6 +27,14 @@ target_link_libraries(
 include(GoogleTest)
 gtest_discover_tests(hello_test)
 
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+	message("buid type: Release")
+	set(CMAKE_CXX_FLAGS "-Wall -o3")
+else() 
+	message("build type:debug")
+	set(CMAKE_BUILD_TYPE "Debug")
+	set(CMAKE_CXX_FLAGS "-Wall -g")
+endif()
 
 #project
 add_executable(main src/main.cpp)
@@ -34,4 +42,5 @@ message("projectname:" ${CMAKE_PROJECT_NAME})
 message("version:" ${CMAKE_PROJECT_VERSION})
 target_compile_definitions(main PUBLIC PROJECTNAME="${CMAKE_PROJECT_NAME}")
 target_compile_definitions(main PUBLIC PROJECTVERSION="${CMAKE_PROJECT_VERSION}")
+target_compile_definitions(main PUBLIC BUILDTYPE="${CMAKE_BUILD_TYPE}")
 

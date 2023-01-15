@@ -1,22 +1,20 @@
-#include<stdio.h>
-
-void projectMessage() {
-	printf("==============project message==============\n");
+#include <stdio.h>
+void message()
+{
+  printf("==============project message==============\n");
 #ifdef PROJECTNAME
-	printf("PROJECT NAME:%s\n", PROJECTNAME);
-#else
-	printf("PROJECT NAME:\n");
+  printf("PROJECT NAME:%s\n", PROJECTNAME);
 #endif
-
 #ifdef PROJECTVERSION
-	printf("PROJECT VERSION:%s\n", PROJECTVERSION);
-#else
-	printf("RPOJECT VERSION:\n");
+  printf("PROJECT VERSION:%s\n", PROJECTVERSION);
 #endif
-	printf("COMPILED TIME:%s %s\n",__DATE__, __TIME__);
+#ifdef BUILDTYPE
+  printf("BUILD TYPE:%s\n", BUILDTYPE);
+#endif
 }
 
-int main() {
-	projectMessage();
-	return 0;
+int main()
+{
+  message();
+  return 0;
 }
